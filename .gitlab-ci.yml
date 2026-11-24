@@ -1,0 +1,10 @@
+workflow:
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && ($CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "trigger")'
+    - when: never
+
+runner-smoke:
+  image: python:3.12-bookworm@sha256:399818abb9307aba178a708ab7289b27c4ca4651b927ea06d3d9bf6f3d37c3b2
+  timeout: 5 minutes
+  script:
+    - python3 -I scripts/runner_smoke.py gitlab
